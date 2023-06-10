@@ -1,0 +1,375 @@
+/* You can add global styles to this file, and also import other style files */
+@import './scss/partials/bootstrap-breakpoints';
+@import './scss/custom-variables.scss';
+@import './scss/fontawesome5/fontawesome';
+@import './scss/fontawesome5/regular';
+@import './scss/fontawesome5/solid';
+@import './scss/fontawesome5/brands';
+@import './scss/themes/theme-default.scss';
+@import './scss/themes/theme-default-dark.scss';
+@import './scss/themes/theme-premium.scss';
+@import './scss/themes/theme-gradient.scss';
+@import './scss/themes/theme-ibetsport-light.scss';
+
+:root {
+  --primary-color: #fff;
+  --bs-body-bg: #354152 !important;
+  --bs-btn-bg: #1c5eac;
+  --background: var(--bs-body-bg) !important;
+  --background-color: var(--bs-body-bg) !important;
+  --text-color: #2d2d2d;
+  --bg: #fffdf2;
+  min-height: 100vh;
+}
+
+.btn {
+  background-color: var(--bs-btn-bg) !important;
+}
+
+body {
+  background: var(--background);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  --bs-btn-hover-bg: #000
+}
+
+a {
+  text-decoration: none
+}
+
+.input-group-text {
+ height: 38px;
+}
+
+.ng-select {
+ padding: 0px;
+}
+
+.modal-backdrop {
+ z-index: auto !important;
+}
+
+.ng-select .ng-select-container {
+  color: #333;
+  background-color: #bbbbbb;
+  border-radius: 4px;
+  border:none !important;
+  min-height: 0px !important;
+  align-items: center !important;
+}
+
+.fc .fc-toolbar-title {
+ text-transform: capitalize !important;
+ @include media-breakpoint-down(md) {
+   font-size: 11px !important;
+ }
+}
+
+.homeBody{
+
+  .card-login {
+    border: none;
+    max-width: 400px;
+    box-shadow: 0 0 250px #000;
+    border-radius: 5px;
+    color: aqua;
+  }
+
+  .register {
+    box-shadow: 0 0 250px #000;
+    padding: 4rem 2rem;
+  
+  }
+  
+
+  ::placeholder {
+    color: #fff !important;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: #837d7d;
+  }
+
+  ::-ms-input-placeholder {
+    color: #837d7d;
+  }
+
+  input {
+    margin-bottom: 3px;
+    margin-top: 0.7rem;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background: rgb(196 196 196 / 19%);
+    border: 0.5px solid aqua;
+  }
+
+  .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+    border-radius: 5px;
+  }
+
+  .form-control:focus {
+    border: 0.5px solid aqua;
+    background:rgb(0 0 0 / 19%); 
+  }
+
+  input:-internal-autofill-selected {
+    background-color: rgb(232, 240, 254);
+    background-image: none;
+    color: -internal-light-dark-color(black, rgb(0, 0, 0));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0), inset 0 0 0 100px rgba(255, 255, 255,1);
+  }
+
+  input:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    color: #fff;
+    outline-width: 0;
+    border-radius: 5px;
+    border: 0.5px solid aqua;
+    background: rgb(196 196 196 / 19%);
+  }
+
+  .top-header-card {
+    background-color: var(--color-blue);
+    border: 0;
+    padding: 1rem 0.5rem;
+  }
+
+  .main-logo-login {
+    img {
+      max-width: 10rem;
+    }
+
+    .logo-box {
+      background-image: url('../src/assets/images/slogan-white.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 9rem;
+      height: 3rem;
+      display: inline-block;
+
+    }
+  }
+
+  .text-dim {
+    color: #747373;
+  }
+
+  .text-recover-password {
+    color: #18a6d1;
+    font-size: 12px;
+  }
+
+  .text-recover-password:hover {
+    color: #1796bd;
+  }
+
+  .input-wrap-password {
+    position: relative;
+    z-index: 1;
+
+    input{
+      padding-right: 3rem;
+    }
+
+    .icon-view-password {
+      position: absolute;
+      right: 9px;
+      top: 19px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+  }
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px white inset !important;
+}
+
+
+.btn-primary {
+  border: 2px solid var(--bs-btn-bg) !important;
+  color: #fff !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  background-color: #1076bb;
+  border: 2px solid #1076bb;
+  color: #fff;
+}
+
+.btn-primary:active {
+  background-color: #1076bb !important;
+  border: 2px solid #1076bb;
+  color: #fff;
+}
+
+.swal2-title {
+ font-size: 22px !important;
+ text-align: left;
+ margin: 0;
+}
+
+.swal2-content {
+ padding: 10px !important;
+ font-size: 16px !important;
+}
+
+.swal2-container.sw-leave-container {
+ .swal2-header {
+     background-color: var(--color-primary-800);
+     padding: 8px;
+     align-items: flex-start;
+ }
+ .swal2-title {
+   font-size: 0.875em !important;
+   text-align: left;
+   color: transparentize(#fff, 0.125);
+   margin: 0;
+ }
+ .swal2-content {
+     padding: 15px;
+     font-size: 16px;
+ }
+ .swal2-actions {
+     padding: 0 8px 8px 8px;
+     margin: 0;
+     align-items: flex-end;
+ }
+}
+.swal2-popup {
+ margin-top: 2em;
+}
+
+@media (min-width : 992px) {
+  .offcanvas {
+    visibility      : visible;
+    position        : relative;
+    background      : none;
+    border          : none;
+    justify-content : end;
+    color           : red;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .offcanvas {
+    width : 320px !important;
+  }
+  .offcanvas-start-lg {
+    top          : 0;
+    left         : 0;
+    border-right : 1px solid rgba(0, 0, 0, .2);
+    transform    : translateX(-100%);
+  }
+
+  .zui-table .zui-sticky-col{
+    height: -webkit-fill-available !important;
+  }
+}
+
+.spinner-border {
+  height: 15px;
+  width: 15px;
+}
+.text-right {
+  text-align: right;
+}
+
+.zui-wrapper{
+  margin-top: 5px;
+}
+
+.blue{
+  color:#337ab7 !important
+}
+
+button:focus:not(:focus-visible) {
+    outline: 0;
+    border: none;
+}
+
+.jarviswidget header {
+  padding: 6px 5px !important;
+  border-radius: 0px 5px 0px 0px !important;
+  justify-content: space-between;
+  display: block;
+}
+
+.jarviswidget > div {
+  border-radius: 0px 0px 5px 5px !important;
+}
+
+.col-sm-8, .col-sm-4, .col-sm-12 {
+  transition: 0.5s;
+}
+
+.text-underline:hover{
+  color: black;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+
+.page_404{ 
+  padding:40px 0;
+  background:#fff; 
+  font-family: 'Arvo', serif;
+  height: 100vh;
+}
+
+.page_404  img{ width:100%;}
+
+.four_zero_four_bg{
+
+background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  height: 400px;
+  background-position: center;
+}
+
+
+.four_zero_four_bg h1{
+font-size:80px;
+}
+
+.four_zero_four_bg h3{
+font-size:80px;
+}
+
+.link_404{ 
+color: #fff!important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;}
+.contant_box_404{ margin-top:-50px;}
+
+.notifications {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 10000;
+  min-width: 250px;
+  max-width: 250px;
+  font-size: 12px;
+}
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

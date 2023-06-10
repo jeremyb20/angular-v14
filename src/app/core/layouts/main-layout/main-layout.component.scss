@@ -1,0 +1,83 @@
+@import '../../../../scss/partials/bootstrap-breakpoints';
+
+@include media-breakpoint-up(lg) {
+  .content {
+    margin-left: 50px;
+    padding: 10px;
+    transition: .5s;
+  
+    &.sidebarExpanded {
+      margin-left: 220px;
+    }
+  
+    &.sidebarDesktopExpanded {
+      margin-left: 50px;
+    }
+  }
+  
+  .content-none {
+    margin-left: 50px;
+    padding: 0px;
+    transition: .5s;
+  
+    &.sidebarExpanded {
+      margin-left: 220px;
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .content-none {
+    //margin-left: 50px;
+    padding: 0px;
+    transition: .5s;
+  
+    &.sidebarExpanded {
+      margin-left: 220px;
+    }
+  }
+  .content {
+    //margin-left: 50px;
+
+    &.sidebarExpanded {
+      margin-left: 220px;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .content-none {
+    margin-left: 0px;
+    padding: 0px;
+    transition: .5s;
+  
+    &.sidebarExpanded {
+      margin-left: 220px;
+    }
+  }
+
+  .content {
+    margin-left: 0px;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .content-none {
+    margin-left: 0px;
+    padding: 0px;
+    transition: .5s;
+  
+    &.sidebarExpanded {
+      margin-left: 220px;
+    }
+  }
+
+  .content {
+    margin-left: 0px;
+  }
+}
+
+.content {
+  padding: 10px;
+  transition: .5s;
+}

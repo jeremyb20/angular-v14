@@ -1,0 +1,16 @@
+.content {
+  margin-left: 60px;
+  padding: 10px;
+  transition: .5s;
+  &.sidebarExpanded {
+    margin-left: 200px;
+  }
+}
+.content-none {
+  margin-left: 60px;
+  padding: 0px;
+  transition: .5s;
+  &.sidebarExpanded {
+    margin-left: 200px;
+  }
+}

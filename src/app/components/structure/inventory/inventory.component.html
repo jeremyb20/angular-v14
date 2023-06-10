@@ -1,0 +1,272 @@
+<div class="row g-0">
+  <div [ngClass]="{'col-sm-8': showUserCard, 'col-sm-12':!showUserCard}">
+    <ngx-datatable [tableId]="'marcas'" tableClass="table table-striped table-bordered table-hover" [data]="data" [options]="options" [columns]="columns">
+        <ngx-caption>
+            <div class="row p-1">
+                <div class="col-sm-6 col-xs-6 col-6 ">
+                    <b>
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                        Inventario <span *ngIf="!Media.IsMobile">Smart Shop</span>
+                    </b>
+                </div>
+                <div class="col-sm-6 col-xs-6 col-6  text-end">
+                  <button type="button" class="btn btn-secondary" (click)="createOrEditModalInventory([],'Nuevo Inventario', true)">
+                      <i class="fa fa-plus" aria-hidden="true"></i> <span *ngIf="!Media.IsMobile"> Crear</span> Inventario
+                  </button>
+                </div>
+            </div>
+        </ngx-caption>
+        <ng-template #seeImage let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+          <a data-toggle="tooltip" data-placement="top" title="Ver Imagen" data-original-title="Ver Imagen" (click)="goToImage(row)"><i class="fas fa-eye me-3 text-success"></i> </a>
+        </ng-template>
+        <ng-template #seeQrCode let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+          <a data-toggle="tooltip" data-placement="top" title="Ver QR" data-original-title="Ver QR" (click)="goToQRcode(row)"><i class="fas fa-qrcode me-3 text-info"></i> </a>
+        </ng-template>
+        <ng-template #actionEditAndDelete let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+          <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit" (click)="createOrEditModalInventory(row, 'Editar Marca', false)"><i class="fas fa-pencil-alt me-3 text-primary"></i> </a>
+          <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close" (click)="deleteInventory(row)"><i class="fas fa-trash text-danger"></i></a>
+        </ng-template>
+    </ngx-datatable>
+  </div>
+  <div *ngIf="showCardRightBrands" class="col-sm-4 px-3">
+    <div class="homeBody">
+      <div class="modal-content shadow">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+          <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+        <form class="form-signin" [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="row g-3 mb-2">
+              <div class="col-md-6">
+                <label class="mb-0 fw-bold">Nombre del Producto</label>
+                <div class="input-group input-wrap-password">
+                  <input name="nombreProducto" formControlName="nombreProducto" class="form-control" id="nombreProducto" [ngClass]="{ 'is-invalid': submitted && f.nombreProducto.errors }" placeholder="Inserte el nombre">
+                  <div *ngIf="submitted && f.nombreProducto.errors" class="invalid-feedback">
+                    <div *ngIf="f.nombreProducto.errors.required">Nombre del Producto es requerida</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="mb-0 fw-bold">Marca del Producto</label>
+                <div class="input-group input-wrap-password">
+                  <input name="marca" formControlName="marca" class="form-control" id="marca" [ngClass]="{ 'is-invalid': submitted && f.marca.errors }" placeholder="Inserte la marca">
+                  <div *ngIf="submitted && f.marca.errors" class="invalid-feedback">
+                    <div *ngIf="f.marca.errors.required">Marca del Producto es requerida</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-2">
+              <div class="col-md-6">
+                <label class="mb-0 fw-bold">Tamaño del Producto</label>
+                <div class="input-group input-wrap-password">
+                  <input name="tamanno" formControlName="tamanno" class="form-control" id="tamanno" [ngClass]="{ 'is-invalid': submitted && f.tamanno.errors }" placeholder="Inserte el tamaño">
+                  <div *ngIf="submitted && f.tamanno.errors" class="invalid-feedback">
+                    <div *ngIf="f.tamanno.errors.required">Tamaño del Producto es requerida</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="mb-0 fw-bold">Peso del Producto</label>
+                <div class="input-group input-wrap-password">
+                  <input name="peso" formControlName="peso" class="form-control" id="peso" [ngClass]="{ 'is-invalid': submitted && f.peso.errors }" placeholder="Inserte el peso">
+                  <div *ngIf="submitted && f.peso.errors" class="invalid-feedback">
+                    <div *ngIf="f.peso.errors.required">Peso del Producto es requerida</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-2">
+              <div class="col-md-6">
+                <label class="mb-0 fw-bold">Precio del Producto</label>
+                <div class="input-group input-wrap-password">
+                  <input name="precio" formControlName="precio" class="form-control" id="precio" [ngClass]="{ 'is-invalid': submitted && f.precio.errors }" placeholder="Inserte el precio">
+                  <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
+                    <div *ngIf="f.precio.errors.required">Precio del Producto es requerida</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="mb-0 fw-bold">Cantidad del Producto</label>
+                <div class="input-group input-wrap-password">
+                  <input name="cantidadInventario" formControlName="cantidadInventario" class="form-control" id="cantidadInventario" [ngClass]="{ 'is-invalid': submitted && f.cantidadInventario.errors }" placeholder="Inserte la cantidad">
+                  <div *ngIf="submitted && f.cantidadInventario.errors" class="invalid-feedback">
+                    <div *ngIf="f.cantidadInventario.errors.required">Cantidad del Producto es requerida</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Descripcion del Producto</label>
+              <div class="input-group input-wrap-password">
+                <input name="descripcion" formControlName="descripcion" class="form-control" id="descripcion" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" placeholder="Inserte la descripción">
+                <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                  <div *ngIf="f.descripcion.errors.required">Descripcion del Producto es requerida</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-2 text-start">
+                <div class="card text-white">
+                  <img [src]="photoSelected" alt="seleccionefoto" style="height: 200px; object-fit: contain;" class="img-fluid">
+                  <div style="margin-top: 70px;" class="card-img-overlay text-center">
+                    <button class="textLink" (click)="photoinput.click()"><i class="fas fa-upload"></i> <span *ngIf="!photoSelected"> Seleccione la Imagen</span> <span *ngIf="photoSelected"> {{this.file.name}}</span></button>
+                    <input #photoinput type="file" name="image" accept="image/*" class="d-none" (change)="processFile($event)">
+                  </div>
+                </div>
+            </div>
+
+            <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+              <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" (click)="hideCard()">Cancelar</button>
+            <button type="submit" class="btn btn-block btn-info btn-sm">
+              {{buttonText}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- newInventoryModal -->
+<div class="modal fade" id="newInventoryModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="newInventoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="newInventoryModalLabel">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="form-signin" [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Nombre del Producto</label>
+            <div class="input-group input-wrap-password">
+              <input name="nombreProducto" formControlName="nombreProducto" class="form-control" id="nombreProducto" [ngClass]="{ 'is-invalid': submitted && f.nombreProducto.errors }" placeholder="Inserte el nombre">
+              <div *ngIf="submitted && f.nombreProducto.errors" class="invalid-feedback">
+                <div *ngIf="f.nombreProducto.errors.required">Nombre del Producto es requerida</div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3 mb-2">
+            <div class="col-6">
+              <label class="mb-0 fw-bold">Tamaño del Producto</label>
+              <div class="input-group input-wrap-password">
+                <input name="tamanno" formControlName="tamanno" class="form-control" id="tamanno" [ngClass]="{ 'is-invalid': submitted && f.tamanno.errors }" placeholder="Inserte el tamaño">
+                <div *ngIf="submitted && f.tamanno.errors" class="invalid-feedback">
+                  <div *ngIf="f.tamanno.errors.required">Tamaño del Producto es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="mb-0 fw-bold">Peso</label>
+              <div class="input-group input-wrap-password">
+                <input name="peso" formControlName="peso" class="form-control" id="peso" [ngClass]="{ 'is-invalid': submitted && f.peso.errors }" placeholder="Inserte el peso">
+                <div *ngIf="submitted && f.peso.errors" class="invalid-feedback">
+                  <div *ngIf="f.peso.errors.required">Peso del Producto es requerida</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-2">
+            <div class="col-6">
+              <label class="mb-0 fw-bold">Precio</label>
+              <div class="input-group input-wrap-password">
+                <input name="precio" formControlName="precio" class="form-control" id="precio" [ngClass]="{ 'is-invalid': submitted && f.precio.errors }" placeholder="Inserte el precio">
+                <div *ngIf="submitted && f.precio.errors" class="invalid-feedback">
+                  <div *ngIf="f.precio.errors.required">Precio del Producto es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="mb-0 fw-bold">Cantidad</label>
+              <div class="input-group input-wrap-password">
+                <input name="cantidadInventario" formControlName="cantidadInventario" class="form-control" id="cantidadInventario" [ngClass]="{ 'is-invalid': submitted && f.cantidadInventario.errors }" placeholder="Inserte la cantidad">
+                <div *ngIf="submitted && f.cantidadInventario.errors" class="invalid-feedback">
+                  <div *ngIf="f.cantidadInventario.errors.required">Cantidad del Producto es requerida</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Descripcion del Producto</label>
+            <div class="input-group input-wrap-password">
+              <input name="descripcion" formControlName="descripcion" class="form-control" id="descripcion" [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" placeholder="Inserte la descripción">
+              <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                <div *ngIf="f.descripcion.errors.required">Descripcion del Producto es requerida</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2 text-start">
+              <div class="card text-white">
+                <img [src]="photoSelected" alt="" style="height: 200px; object-fit: contain;" class="img-fluid" srcset="">
+                <div style="margin-top: 70px;" class="card-img-overlay text-center">
+                  <button class="textLink" (click)="photoinput.click()"><i class="fas fa-upload"></i> <span *ngIf="!photoSelected"> Seleccione la Imagen</span> <span *ngIf="photoSelected"> {{this.file.name}}</span></button>
+                  <input #photoinput type="file" name="image" accept="image/*" class="d-none" (change)="processFile($event)">
+                </div>
+              </div>
+          </div>
+
+          <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+            <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" (click)="hideCard()">Cancelar</button>
+          <button type="submit" class="btn btn-block btn-info btn-sm">
+            {{buttonText}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- seeImageInfo -->
+<div class="modal fade" id="seeImageInfo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="seeImageInfoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div *ngIf="productInfoSelected" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="imageInfo">Producto: {{productInfoSelected.nombreProducto}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{productInfoSelected.image}}" style="height: 500px; object-fit: contain;" class="img-fluid" alt="{{productInfoSelected.nombreProducto}}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="seeImageInfo.hide()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- seeQrCodeInfo -->
+<div class="modal fade" id="seeQrCodeInfo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="seeQrCodeInfoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div *ngIf="qrCodeInfoSelected" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="imageInfo">Producto: {{qrCodeInfoSelected.nombreProducto}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <qrcode [qrdata]="qrCodeInfoSelected._id" [width]="256" [level]="'H'"></qrcode>
+        <div class="alert alert-info error-message text-center mt-3" role="alert">
+          <strong class="text-center"><i class="fas fa-qrcode mt-1 mr-3"></i> {{ qrCodeInfoSelected._id }}</strong>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="seeImageInfo.hide()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

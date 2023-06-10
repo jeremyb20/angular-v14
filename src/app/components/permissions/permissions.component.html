@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-12 col-sm-9 col-md-9 col-lg-9">
+    <div *ngIf="data" class="table-responsive p-4 shadow mb-4">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group text-center">
+            <span>Buscar Usuario</span> 
+            <input class="form-control my-2" type="text" placeholder="Busqueda por Usuario" name="searchTerm" autocomplete="off" [(ngModel)]="query"/>
+          </div>
+        </div>
+        <div class="col-6 text-center">
+          <span class="d-block">Opciones</span> 
+          <button class="btn btn-secondary m-1"> Nuevo Usuario</button>
+        </div>
+      </div>
+      <table aria-label="table-report" class="table table-secondary table-hover verticle-middle table-responsive-lg shadow" [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
+          <thead class="text-center thead-dark">
+              <tr>
+                  <th scope="col">ID </th>
+                  <th scope="col">Nombre Usuario<i (click)="onSortClick($event, 'NombreUsuario')" class="ms-1 fa fa-chevron-up"></i></th>
+                  <th scope="col">Codigo Usuario <i (click)="onSortClick($event, 'CodigoUsuario')" class="ms-1 fa fa-chevron-up"></i></th>
+                  <th scope="col">Fecha Registro</th>
+                  <th scope="col">Cambiar Clave</th>
+                  <th scope="col">Idioma</th>
+                  <th scope="col">Tema</th>
+                  <th scope="col">Opciones</th>
+              </tr>
+          </thead>
+          <tbody *ngFor="let i=index; let item of filterData(query)" class="text-center" style="border-top: 0px;">
+              <tr (click)="userSelected(item)">
+                  <td>{{item.IdUsuario}}</td>
+                  <td>{{item.NombreUsuario}}</td>
+                  <td> {{item.CodigoUsuario}}</td>
+                  <td>{{item.FechaRegistroUsuario}}</td>
+                  <td>{{(item.BinCambiarClaveUsuario == 0)? 'Si': 'No'}}</td>
+                  <td>{{item.IdIdiomaDefault}}</td>
+                  <td>{{item.IdTemaCssDefault}}</td>
+                  <td>
+                      <span class="text-center">
+                          <a data-toggle="tooltip" data-placement="top" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt me-3"></i> </a>
+                          <a data-toggle="tooltip" data-placement="top" title="Delete"  data-original-title="Close"><i class="fas fa-trash"></i></a>
+                      </span>
+                  </td>
+              </tr>
+              
+          </tbody>
+      </table>
+  </div>
+
+  </div>
+  <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+    <div class="outer-form table-responsive">
+       <table aria-label="table" class="table table-hover verticle-middle table-responsive-lg mb-0" [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
+          <thead style="color: white; font-weight: normal; background-color: black;" >
+            <tr>
+              <th scope="col" class="head">Navegador</th>
+              <th scope="col" class="head">Permisos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-template ngFor let-element [ngForOf]="navigation" let-i="index">
+              <tr>
+                <td><a class="nav_link"> <i class='{{element.iconClass}} nav_icon'></i> <span class="nav_name">{{ element.translate | translate }}</span> </a></td>
+                <td>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [ngModel]="element.hasPermission" checked="element.hasPermission">
+                  </div>
+                </td>
+              </tr> 
+              <tr *ngFor="let val of element.sub">
+                <td><a class="nav_link"> <i class='{{val.iconClass}} nav_icon'></i> <span class="nav_name">{{ val.translate | translate }}</span> </a></td> 
+                <td>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [ngModel]="val.hasPermission" checked="val.hasPermission">
+                  </div>
+                </td>
+              </tr> 
+            </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

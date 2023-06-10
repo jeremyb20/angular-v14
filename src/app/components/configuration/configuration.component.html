@@ -1,0 +1,36 @@
+<div class="row" style="margin: 0px;">
+  <div class="col-12 col-sm-6"  [ngClass]="{'mt-4': Media.IsMobile}">
+    <div class="card-profile shadow">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <h4 for="darkTheme"> {{ 'HOME.THEME.TEXT' | translate }}: <span>{{currentTheme}}</span></h4>
+        <div class="row row-cols-1 row-cols-md-1 g-4 mt-1">
+          <div class="col"*ngFor="let item of themes">
+            <div (click)="setTheme(item.themeClass)"class="card" [ngClass]="item.themeClass" [ngStyle]="{'background': 'var(--' + item.themeClass + ')' }">
+              <div class="card-body text-center text-light">
+                <h5 class="card-title">{{ item.themeText | translate }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6"  [ngClass]="{'mt-4': Media.IsMobile}">
+    <div class="card-profile shadow">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <h4>{{ 'HOME.TITLE' | translate }}</h4>
+        <label>
+          {{ 'HOME.SELECT' | translate }}
+          <select class="form-select" #langSelect (change)="changetranslator(langSelect.value)">
+            <option *ngFor="let lang of _translate.getLangs()" [value]="lang" [selected]="lang === _translate.currentLang()">{{ lang }}</option>
+          </select>
+        </label>
+        <span style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#passwordModal" class="dropdown-item"><i class="fas fa-lock nav_icon me-2"></i>  Cambiar Contraseña</span>
+        <button class="btn btn-primary" (click)="showtoast()">
+          Show notification
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,67 @@
+<p>Escanea tus productos!</p>
+<div class="scanner-shell" [hidden]="!hasDevices">
+  <zxing-scanner [torch]="torchEnabled" [(device)]="currentDevice" (scanSuccess)="onCodeResult($event)"
+  [formats]="formatsEnabled" [tryHarder]="tryHarder" (permissionResponse)="onHasPermission($event)"
+  (camerasFound)="onCamerasFound($event)" (torchCompatible)="onTorchCompatible($event)"></zxing-scanner>
+
+  <div *ngIf="qrResultString" style=" background-color: #bbbbbb; color:#fff;"  class="row g-0 p-2">
+    <div class="col-10"><strong>{{ qrResultString }}</strong> </div>
+    <div class="col-2 text-end">  <button class="btn btn-primary" (click)="clearResult()">&times; Limpiar</button></div>
+  </div>
+</div>
+
+<ng-container *ngIf="hasPermission === undefined">
+
+  <h2>Esperando permisos.</h2>
+
+  <blockquote>
+    Si su dispositivo no tiene cámaras, no se solicitarán permisos.
+  </blockquote>
+
+</ng-container>
+
+<ng-container *ngIf="hasPermission === false">
+
+  <h2>Negaste el permiso de la cámara, no podemos escanear nada sin ella. 😪</h2>
+
+</ng-container>
+
+<ng-container *ngIf="hasDevices === undefined">
+
+  <h2>No se pudieron verificar los dispositivos.</h2>
+
+  <blockquote>
+    Esto puede deberse a algún error de seguridad.
+  </blockquote>
+
+</ng-container>
+
+<ng-container *ngIf="hasDevices === false">
+
+  <h2>No devices were found.</h2>
+
+  <blockquote>
+    I believe your device has no media devices attached to.
+  </blockquote>
+
+</ng-container>
+
+
+<!-- seeImageInfo -->
+<div class="modal fade" id="seeImageInfo" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="seeImageInfoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div *ngIf="productInfoSelected" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="imageInfo">Producto: {{productInfoSelected.nombreProducto}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{productInfoSelected.image}}" style="height: 500px; object-fit: contain;" class="img-fluid" alt="{{productInfoSelected.nombreProducto}}">
+        <p>Precio: {{ productInfoSelected.precio | currency:"CRC":"₡"}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="seeImageInfo.hide()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

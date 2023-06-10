@@ -1,0 +1,14 @@
+<div *ngIf="user != 'Administrador'">
+  <div *ngIf="this.routeState !== '/login' && this.routeState !== '/404' ">
+    <app-side-nav [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></app-side-nav>
+  </div>
+  <div *ngIf="this.routeState !== '/login' && this.routeState !== '/404'" [ngClass]="{ 'sidebarExpanded': sidebarExpanded, 'content-none': this.routeState !== '/login' }">
+    <app-toolbar></app-toolbar>
+  </div>
+  <div [ngClass]="{ 'sidebarExpanded': sidebarExpanded, 'content': this.routeState !== '/login' && this.routeState !== '/404', 'sidebarDesktopExpanded': Media.IsMobile}">
+    <ng-http-loader [backdrop]="true" [backgroundColor]="'#ff0000'" [debounceDelay]="100" [extraDuration]="100" [minDuration]="100" [opacity]="opacity" [backdropBackgroundColor]="'#0a0a0a'" [spinner]="spinkit.skWave">
+      
+    </ng-http-loader>
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+{
+  "HOME": {
+    "TEXT": "INICIO",
+    "TITLE": "¡La configuración está en español!",
+    "SELECT": "Cambiar de idioma",
+    "TOAST": "Mostrar Toast",
+    "THEME": {
+      "TEXT": "Tema seleccionado",
+      "DEFAULT": "Tema Azul",
+      "DARK": "Tema Oscuro",
+      "PREMIUM": "Tema Premium",
+      "GRADIENT": "Tema Gradiente",
+      "IBETSPORT": "Tema Ibet Sports"
+    },
+    "TABLE": {
+      "COUNTRY": "Pais",
+      "AREA": "Area",
+      "POPULATION": "Poblacion"
+    }
+  },
+  "ADMIN": {
+    "NAVBAR": {
+      "PERMISSIONS": "Permisos",
+      "PROFILE": "Mi cuenta",
+      "OPTIONS": {
+        "TEXT": "Opciones",
+        "PROFILE": "Mi Perfil",
+        "CONFIGURATION": "configuración",
+        "LOGOUT": "Cerrar Sesión"
+      },
+      "STRUCTURES": {
+        "TEXT": "Mantenimientos",
+        "INVENTORY": "Inventario",
+        "USERS": "Usuarios",
+        "EMPLOYEES": "Empleados"
+      }
+    }
+  },
+  "USER": {
+    "NAVBAR": {
+      "FAVORITE": "Favorito",
+      "PRO_FOOTBALL": "Futbol Pro",
+      "FOOTBAL_PROPS": "Propiedades Futbol Pro",
+      "PRO_FOOTBAL_FUTURES": "Futuros Futbol Pro",
+      "PRO_BASKETBALL": "Basketbol Pro",
+      "BASKETBALL_PROPS": "Basketbol Propiedades",
+      "BASKETBALL_FUTURES": "Futuros Basketbol",
+      "COLLEGE_BASKETBALL": "Basketbol Colegial",
+      "COLLEGE_BASKETBALL_PROPS": "Basketbol Colegial Propiedades",
+      "HOCKEY": "Hockey",
+      "HOCKEY_PROPS": "Basketbol Propiedades",
+      "HOCKEY_FUTURES": "Futuros Basketbol",
+      "BASEBALL_FUTURES": "Futuros Basketbol",
+      "BASEBALL_REG_SEASON_PROPS": "Futuros Basketbol",
+      "COLLEGE_FOOTBALL_FUTURES": "Basketbol Colegial Propiedades",
+      "SOCCER": "Futbol Soccer",
+      "SOCCER_PROPS": "Basketbol Propiedades",
+      "SOCCER_FUTURES": "Basketbol Propiedades",
+      "FIGHTING": "Luchas",
+      "GOLF": "Golf",
+      "TENNIS": "Tenis",
+      "MOTOR_RACING": "Automovilismo",
+      "HORSES": "Caballos",
+      "WINTER_OLYMPICS": "Juegos Olímpicos de invierno",
+      "RUGBY": "Rugby",
+      "CRICKET": "Cricket",
+      "VOLLEYBALL": "Vóleibol",
+      "POLITICS": "Pilítica",
+      "ENTERTAIMENT": "Entretenimiento",
+      "OTHER_SPORTS": "Otros deportes",
+      "SPORTS": "Deportes",
+      "E_SPORTS": "E-Sports",
+      "LIVE_WAGER": "Apuestas en Vivo",
+      "CASINO": "Casino",
+      "PROPS_BUILDER": "Props Constructor",
+      "RACEBOOK": "Racebook",
+      "CONTEST": "Contest",
+      "COCKFIGHT": "Pelea de Gallos",
+      "VIRTUAL_SPORTS": "Deportes Virtuales",
+      "POKER": "Poker",
+      "DASHBOARD": "Panel",
+      "SCANNER": "Scanner",
+      "LOGOUT": "Cerrar Sesión"
+    },
+    "COMPONENTS": {}
+  }
+}

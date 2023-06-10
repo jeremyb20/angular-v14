@@ -1,0 +1,51 @@
+<div *ngIf="user === 'Administrador'" class="sidebar-admin">
+    <nav id="nav" class="navbar nav navbar-expand-lg navbar-dark bg-admin sticky-top">
+      <div class="container-fluid">
+        
+        <a [routerLink]="'/admin'" [routerLinkActive]="['active']" class="navbar-brand d-none d-md-block nav-link nav_link waves-effect waves-light"><i class='fas fa-house-user nav_icon me-2'></i> <span class="nav_name">{{this.username}}</span></a>
+        <div class="offcanvas offcanvas-start-lg bg-admin align-items-end" [ngClass]="{'align-items-end bg-transparent': !Media.IsMobile}" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-white" id="offcanvasExampleLabel">
+              <a [routerLink]="'/admin'" [routerLinkActive]="['active']" class="nav-link nav_link waves-effect waves-light me-4">
+                <i class='far fa-user nav_icon'></i> <span class="nav_name">{{this.username}}</span>
+              </a>
+            </h5>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav me-auto">
+              <li *ngFor="let item of navigation_admin; let i = index" class="nav-item" [ngClass]="{'mb-4' : Media.IsMobile}">
+                <a data-bs-dismiss="offcanvas" [routerLink]="item.routerLink" [routerLinkActive]="['active']" class="nav-link nav_link waves-effect waves-light me-4">
+                  <i class='{{item.iconClass}} nav_icon'></i> <span class="nav_name">{{ item.translate | translate }}</span>
+                </a>
+              </li>
+              <li class="nav-item dropdown d-md-block" [ngClass]="{'mb-4' : Media.IsMobile}">
+                <a class="nav-link dropdown-toggle waves-effect waves-light nav-link nav_link" id="navbarDropdownMenuLink-4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cog nav_icon"></i> {{ 'ADMIN.NAVBAR.OPTIONS.TEXT' | translate }} </a>
+                <div class="dropdown-menu dropdown-menu-left dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                  <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/profile-admin'"><i class='fas fa-user nav_icon'></i> <span class="nav_name">{{ 'ADMIN.NAVBAR.OPTIONS.PROFILE' | translate }}</span> </a>
+                  <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/configuration-admin'"><i class="fas fa-cog nav_icon"></i> <span class="nav_name">{{ 'ADMIN.NAVBAR.OPTIONS.CONFIGURATION' | translate }}</span> </a>
+                  <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" (click)="logout()"><i class='fas fa-sign-out-alt nav_icon'></i> <span class="nav_name">{{ 'ADMIN.NAVBAR.OPTIONS.LOGOUT' | translate }}</span> </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button aria-label="Open Menu" class="btn navbar-toggler border-3 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+    <div class="container-fluid pt-3">
+      <ng-http-loader 
+        [backdrop]="true" 
+        [backgroundColor]="'#ff0000'" 
+        [debounceDelay]="100" 
+        [extraDuration]="1000" 
+        [minDuration]="1000" 
+        [opacity]="opacity" 
+        [backdropBackgroundColor]="'#0a0a0a'" 
+        [spinner]="spinkit.skWave">
+      </ng-http-loader>
+      <router-outlet></router-outlet>
+    </div>
+  </div>

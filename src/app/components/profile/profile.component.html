@@ -1,0 +1,132 @@
+<div class="rounded mb-5 ms-1 me-1">
+    <form class="d-flex" [formGroup]="profileForm" (ngSubmit)="onSaveProfile()">
+    <div class="row">
+      <div class="col-sm-4" [ngClass]="{'mt-4': Media.IsMobile}">
+        <div class="card-profile shadow border">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img alt="profile" class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <span class="font-weight-bold">{{userName}}</span>
+            <span class="text-black-50">{{empresaDefault}}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-sm-4" [ngClass]="{'mt-4': Media.IsMobile}">
+        <div class="card-profile shadow border">
+          <div class="p-3 py-2">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Perfil de {{userName}} </h4>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <label class="labels">Nombre usuario</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="FullName" formControlName="FullName" [ngClass]="{ 'is-invalid': submitted && f.FullName.errors }" class="form-control" placeholder="nombre completo">
+                <div *ngIf="submitted && f.FullName.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.FullName.errors }">
+                  <div *ngIf="f.FullName.errors.required">Nombre usuario es requerido</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="labels">Apellido</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="SurName" formControlName="SurName" [ngClass]="{ 'is-invalid': submitted && f.SurName.errors }" class="form-control" placeholder="apellido">
+                <div *ngIf="submitted && f.SurName.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.SurName.errors }">
+                  <div *ngIf="f.SurName.errors.required">Apellido es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <label class="labels">Número de teléfono</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="PhoneNumber" formControlName="PhoneNumber" [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }" class="form-control" placeholder="teléfono">
+                <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.PhoneNumber.errors }">
+                  <div *ngIf="f.PhoneNumber.errors.required">Teléfono es requerido</div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Dirección Linea 1</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="Address" formControlName="Address" [ngClass]="{ 'is-invalid': submitted && f.Address.errors }" class="form-control" placeholder="Dirección 1">
+                <div *ngIf="submitted && f.Address.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.Address.errors }">
+                  <div *ngIf="f.Address.errors.required">Dirección 1 es requerido</div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Dirección Linea 2</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="SecondAddress" formControlName="SecondAddress" [ngClass]="{ 'is-invalid': submitted && f.SecondAddress.errors }" class="form-control" placeholder="Dirección 2">
+                <div *ngIf="submitted && f.SecondAddress.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.SecondAddress.errors }">
+                  <div *ngIf="f.SecondAddress.errors.required">Dirección 2 es requerido</div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Código Postal</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="PostalCode" formControlName="PostalCode" [ngClass]="{ 'is-invalid': submitted && f.PostalCode.errors }" class="form-control" placeholder="Código postal">
+                <div *ngIf="submitted && f.PostalCode.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.PostalCode.errors }">
+                  <div *ngIf="f.PostalCode.errors.required">Código Postal es requerido</div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Código Usuario</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="CodigoUsuario" formControlName="CodigoUsuario" [ngClass]="{ 'is-invalid': submitted && f.CodigoUsuario.errors }" class="form-control" placeholder="Código Usuario">
+                <div *ngIf="submitted && f.CodigoUsuario.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.CodigoUsuario.errors }">
+                  <div *ngIf="f.CodigoUsuario.errors.required">Código Usuario es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <label class="labels">País</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="Country" formControlName="Country" [ngClass]="{ 'is-invalid': submitted && f.Country.errors }" class="form-control" placeholder="País">
+                <div *ngIf="submitted && f.Country.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.Country.errors }">
+                  <div *ngIf="f.Country.errors.required">País es requerido</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="labels">Estado/Región</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="State" formControlName="State" [ngClass]="{ 'is-invalid': submitted && f.State.errors }" class="form-control" placeholder="Estado o Región">
+                <div *ngIf="submitted && f.State.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.State.errors }">
+                  <div *ngIf="f.State.errors.required">Estado es requerido</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group my-4">
+              <div class="col-12 d-grid gap-2">
+                <button type="submit" class="btn btn-block btn-info btn-sm">
+                  Actualizar Perfil
+                  <div *ngIf="loading" class="ms-3 spinner-border text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+        <div class="col-sm-4" [ngClass]="{'mt-4': Media.IsMobile}">
+          <div class="card-profile shadow border">
+            <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center experience"><span>Configuración</span>
+              </div>
+                <br>
+              <div class="col-md-12">
+  
+                <label class="labels">Compañia por defecto</label>
+                <input (ngModelChange)="modelChange($event)" type="text" name="CompanyDefault" formControlName="CompanyDefault" [ngClass]="{ 'is-invalid': submitted && f.CompanyDefault.errors }" class="form-control" placeholder="Compañía por defecto">
+                <div *ngIf="submitted && f.CompanyDefault.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.CompanyDefault.errors }">
+                  <div *ngIf="f.CompanyDefault.errors.required">Compañia es requerido</div>
+                </div>
+  
+              </div> <br>
+              <div class="col-md-12">
+                <label class="labels">Rol de usuario </label>
+  
+                <input (ngModelChange)="modelChange($event)" type="text" name="RolUser" formControlName="RolUser" [ngClass]="{ 'is-invalid': submitted && f.RolUser.errors }" class="form-control" placeholder="Rol de Usuario">
+                <div *ngIf="submitted && f.RolUser.errors" class="invalid-feedback" [ngClass]="{ 'text-center': submitted && f.RolUser.errors }">
+                  <div *ngIf="f.RolUser.errors.required">Rol es requerido</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  

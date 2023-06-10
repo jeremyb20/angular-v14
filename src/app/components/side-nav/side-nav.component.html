@@ -1,0 +1,64 @@
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded, 'offcanvas offcanvas-start': Media.IsMobile }" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="header shadow-lg" [ngClass]="{'offcanvas-header': Media.IsMobile}">
+      <div class="title">
+        <span tabindex="-1" style="cursor: pointer;" data-bs-dismiss="offcanvas" (click)="goTo('/dashboard')">
+          <img src="../../../assets/images/slogan-white.png" class="w-100 rounded mb-1" alt="test"/>
+        </span>
+      </div>
+      <div class="toggle" *ngIf="!Media.IsMobile" (click)="handleSidebarToggle()">
+        <span class="chevron"></span>
+      </div>
+      <div class="toggle" *ngIf="Media.IsMobile" data-bs-dismiss="offcanvas" aria-label="Close">
+        <span class="chevron"></span>
+      </div>
+    </div>
+    <div class="row text-center text-uppercase fw-bold g-0 py-3 user-account" *ngIf="isExpanded || Media.IsMobile">
+      <span class="col-12 text-light mb-2"> {{nameUser}} </span>
+      <span class="col-12 balance "> Balance > <span class="text-success"> $5000</span> </span>
+    </div>
+    <div [ngClass]="{'offcanvas-body offcanvas-height' : Media.IsMobile}">
+      <div *ngIf="navigation" class="content">
+        <div aria-label="navigation" class="nav">
+          <div class="nav_list my-1" *ngFor="let item of navigation; let i = index" #itemEl style="width: -webkit-fill-available;   width: -moz-available;">
+            <div *ngIf="item.hasPermission">
+              <div *ngIf="item.showInSideNav">
+                <span style="cursor: pointer;" tabindex="-1" data-bs-dismiss="offcanvas" *ngIf="item.EISubMenu.length == 0" (click)="goTo(item.routerLink)" [routerLinkActive]="['active']" [ngClass]="{'active': actualRouter == item.routerLink}" class="nav_link text-uppercase"> <i class='{{item.iconClass}} nav_icon' ></i> <span class="nav_name">{{ item.translate | translate }} <span *ngIf="item.isNew" class="badge badge-info bg-danger text-sm" style="font-size: 9px; z-index: 100;">New</span></span>  </span>
+                <div *ngIf="item.EISubMenu.length > 0" class="accordion accordion-flush" id="accordionFlushExample" (click)="showSubmenu(itemEl)">
+                  <div class="accordion-item">
+                    <span id="flush-headingOne {{item.IdMenu}}">
+                      <button class="accordion-button collapsed" (click)='toggle(i)' data-bs-toggle="collapse">
+                        <i class='{{item.iconClass}} nav_icon acordion-icon'></i> <span class="nav_name me-1">{{ item.translate | translate }} <span *ngIf="item.isNew" class="badge badge-info bg-danger text-sm" style="font-size: 9px; z-index: 100;">New</span></span>
+                      </button>
+                    </span>
+                    <div [class.blank]="item.EISubMenu.length == 0" class="accordion-collapse collapse" [class.show]='openAccordion[i]' [attr.aria-labelledby]="'heading' + i">
+                      <div class="accordion-body" *ngFor="let val of item.EISubMenu" [ngClass]="{ 'hide-padding': !isExpanded }">
+                        <div *ngIf="val.hasPermission">
+                          <span style="cursor: pointer;" data-bs-dismiss="offcanvas" tabindex="-1" (click)="goTo(val.routerLink)" [ngClass]="{'active': actualRouter == val.routerLink}"  [routerLinkActive]="['active']" class="nav_link mb-1"> <i class='{{val.iconClass}} nav_icon ms-2' style="margin-right: 6px;"></i> <span class="nav_name">{{ val.translate | translate }} <span *ngIf="val.isNew" class="badge badge-info bg-danger text-sm" style="font-size: 9px; z-index: 100;">New</span></span> </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer" [ngStyle]="{'width': isExpanded && !Media.IsMobile ? '220px': Media.IsMobile ? '320px' : '50px'}">
+        <div class="dropdown py-1 dropup">
+          <a href="/opciones" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle ms-1 text-center fw-bold" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <ng-container *ngIf="Media.IsMobile"> <span class="ms-2">Version {{version}}</span> </ng-container>
+            <ng-container *ngIf="!Media.IsMobile"> <span *ngIf="isExpanded" class="ms-2">Version {{version}}</span> </ng-container>
+            <ng-container *ngIf="!Media.IsMobile"> <span *ngIf="!isExpanded" class="ms-2"><i class="fas fa-cog" aria-hidden="true"></i></span> </ng-container>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow dropdown-left" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" data-bs-dismiss="offcanvas" [routerLink]="'/profile'"><i class='fas fa-user nav_icon me-2'></i> Perfil</a></li>
+              <li><a class="dropdown-item" data-bs-dismiss="offcanvas" [routerLink]="'/configuration'"><i class="fas fa-cog nav_icon me-2"></i> Configuración</a></li>
+              <li>
+                  <hr class="dropdown-divider">
+              </li>
+              <li><a (click)="logout()" class="dropdown-item" href="#"><i class='fas fa-sign-out-alt nav_icon me-2'></i>  {{ 'USER.NAVBAR.LOGOUT' | translate }}</a></li>
+          </ul>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="notifications">
+	<div *ngFor="let notification of notifications" [ngClass]="className(notification)">
+		<ng-container *ngTemplateOutlet="notificationTpl;context:{notification:notification}"></ng-container>
+	</div>
+</div>
+
+<ng-template #notificationTpl let-notification="notification">
+    <div class="mb-2 me-2 animate__animated" [ngClass]="notification.classPropAnimation">
+        <ngb-toast [autohide]="false" class="text-light mb-2" [ngClass]="notification.classProp">
+            <div class="row g-0">
+                <div class="col-10 text-start text-wrap pt-2">
+                    <span>{{notification.message}}</span>
+                </div>
+                <div class="col-2 text-end">
+                    <button type="button" class="btn close text-white" (click)="close(notification)" aria-label="Close">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </ngb-toast>
+    </div>
+</ng-template>
+

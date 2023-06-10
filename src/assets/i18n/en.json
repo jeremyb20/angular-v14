@@ -1,0 +1,86 @@
+{
+  "HOME": {
+    "TEXT": "HOME",
+    "TITLE": "The configuration is in English!",
+    "SELECT": "Change language",
+    "TOAST": "Show Toast",
+    "THEME": {
+      "TEXT": "Theme Selected",
+      "DEFAULT": "Theme Blue",
+      "DARK": "Dark Theme",
+      "PREMIUM": "Premium Theme",
+      "GRADIENT": "Gradient Theme",
+      "IBETSPORT": "Ibet Sports Theme"
+    },
+    "TABLE": {
+      "COUNTRY": "Country",
+      "AREA": "Area",
+      "POPULATION": "Population"
+    }
+  },
+  "ADMIN": {
+    "NAVBAR": {
+      "PERMISSIONS": "Permissions",
+      "PROFILE": "Profile",
+      "OPTIONS": {
+        "TEXT": "Settings",
+        "PROFILE": "Profile",
+        "CONFIGURATION": "configuration",
+        "LOGOUT": "Log Out"
+      },
+      "STRUCTURES": {
+        "TEXT": "Structures",
+        "INVENTORY": "Inventory",
+        "USERS": "Users",
+        "EMPLOYEES": "Employees"
+      }
+    }
+  },
+  "USER": {
+    "NAVBAR": {
+      "FAVORITE": "Favorites",
+      "PRO_FOOTBALL": "Pro Football",
+      "FOOTBAL_PROPS": "Football Props",
+      "PRO_FOOTBAL_FUTURES": "Pro Football Futures",
+      "PRO_BASKETBALL": "Pro Basketball",
+      "BASKETBALL_PROPS": "Basketball Props",
+      "BASKETBALL_FUTURES": "Basketball Futures",
+      "COLLEGE_BASKETBALL": "College Basketball",
+      "COLLEGE_BASKETBALL_PROPS": "College Basketball Props",
+      "HOCKEY": "Hockey",
+      "HOCKEY_PROPS": "Hockey Props",
+      "HOCKEY_FUTURES": "Hockey Futures",
+      "BASEBALL_FUTURES": "Baseball Futures",
+      "BASEBALL_REG_SEASON_PROPS": "Baseball Reg Season Props",
+      "COLLEGE_FOOTBALL_FUTURES": "College Football Futures",
+      "SOCCER": "Soccer",
+      "SOCCER_PROPS": "Soccer Props",
+      "SOCCER_FUTURES": "Soccer Futures",
+      "FIGHTING": "Fighting",
+      "GOLF": "Golf",
+      "TENNIS": "Tennis",
+      "MOTOR_RACING": "Motor Racing",
+      "HORSES": "Horses",
+      "WINTER_OLYMPICS": "Winter Olympics",
+      "RUGBY": "Rugby",
+      "CRICKET": "Cricket",
+      "VOLLEYBALL": "Volleyball",
+      "POLITICS": "Pilitics",
+      "ENTERTAIMENT": "Entertaiment",
+      "OTHER_SPORTS": "Other Sports",
+      "SPORTS": "Sports",
+      "E_SPORTS": "E-Sports",
+      "LIVE_WAGER": "Live Wager",
+      "CASINO": "Casino",
+      "PROPS_BUILDER": "Props Builder",
+      "RACEBOOK": "Racebook",
+      "CONTEST": "Contest",
+      "COCKFIGHT": "Cockfight",
+      "VIRTUAL_SPORTS": "Virtual Sports",
+      "POKER": "Poker",
+      "DASHBOARD": "Dashboard",
+      "SCANNER": "Scanner",
+      "LOGOUT": "Logout"
+    }
+  }
+}
