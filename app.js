@@ -40,9 +40,9 @@ app.use("/api/users", require('./back-end/routes/users.routes'));
 app.use("/api/inventory", require('./back-end/routes/inventory.routes'));
 
 // Start Server
-app.use(express.static(__dirname + '/dist/betslip-fe'));
+app.use(express.static(__dirname + '/dist/angular-v14'));
 app.get('/*', function(_req,res){
-    res.sendFile(path.join(__dirname+'/dist/betslip-fe/index.html'))
+    res.sendFile(path.join(__dirname+'/dist/angular-v14/index.html'))
 })
 
 
