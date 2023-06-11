@@ -2,11 +2,13 @@
   "name": "angular-v14",
   "version": "0.0.0",
   "scripts": {
+    "start": "node index.js",
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "dev": "nodemon index.js"
   },
   "engines": {
     "node": "14.17.5",
