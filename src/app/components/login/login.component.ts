@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           if (result.success) {
             this.translate.use(result.user.lang);
             this._authService.authenticateUserLocal(result.user, result.token);
-            if(result.userRol == 'Usuario'){
+            if(result.user.userRol == 'Usuario'){
               this.router.navigate(['/dashboard']);
             }else{
               this.router.navigate(['/admin']);

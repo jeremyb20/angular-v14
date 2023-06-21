@@ -64,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return sessionStorage.getItem("token");
 }
 
 @NgModule({

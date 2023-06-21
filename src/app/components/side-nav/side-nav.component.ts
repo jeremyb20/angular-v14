@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ElementRef } from "@angular/core";
+import { Component, EventEmitter, Input, Output, ElementRef, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { AuthService } from "src/app/services/auth/auth.service";
@@ -8,6 +8,7 @@ import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular
 import { NAVIGATION } from "src/app/common/constants";
 import Swal from 'sweetalert2';
 import packageJson from '../../../../package.json';
+declare const bootstrap :any;
 
 const DEFAULT_DURATION = 200;
 
@@ -24,7 +25,7 @@ const DEFAULT_DURATION = 200;
   ]
 })
 
-export class SideNavComponent {
+export class SideNavComponent implements OnInit {
   public version: string = packageJson.version;
   @Input() isExpanded: boolean = false;
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -40,6 +41,8 @@ export class SideNavComponent {
   changeDetected: any;
   nameUser: any;
   hidebackdrop: any;
+  newEmployeeModal: any;
+
 
   private mediaSubscription: Subscription
 
@@ -59,11 +62,13 @@ export class SideNavComponent {
       this.Media = media;
     });
 
-    console.log(this.navigation)
-
     setInterval(() => {
       this.getActualRoute();
     }, 1000)
+  }
+
+  ngOnInit(): void {
+    this.newEmployeeModal = new bootstrap.Offcanvas((<HTMLInputElement>document.getElementById("offcanvasExample")));
   }
 
   toggle(i:any){
@@ -109,15 +114,21 @@ export class SideNavComponent {
         cancelButtonText: 'Cancelar!'
       }).then((result) => {
         if (result.isConfirmed) {
+          this.CloseBackdrop();
           this.actualRouter = route;
           this.router.navigate([route]);
           this._authService.changedetected(false);
         }
       })
     }else{
+      this.CloseBackdrop();
       this.actualRouter = encodeURIComponent(route);
       this.router.navigate([route]);
     }
+  }
+
+  CloseBackdrop(){
+    this.newEmployeeModal.hide()
   }
 
 }
