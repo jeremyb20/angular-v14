@@ -20,7 +20,6 @@
   },
   "ADMIN": {
     "NAVBAR": {
-      "PERMISSIONS": "Permissions",
       "PROFILE": "Profile",
       "OPTIONS": {
         "TEXT": "Settings",
@@ -32,7 +31,8 @@
         "TEXT": "Structures",
         "INVENTORY": "Inventory",
         "USERS": "Users",
-        "EMPLOYEES": "Employees"
+        "EMPLOYEES": "Employees",
+        "PERMISSIONS": "Permissions"
       }
     }
   },

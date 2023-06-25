@@ -1,74 +1,89 @@
-
 <div class="toolbar-header">
   <div class="row g-0">
-     <div class="col-10 justify-content-between align-items-center">
-       <button class="btn btn-primary mt-3" aria-label="Open Menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" *ngIf="Media.IsMobile">
-         <i class="fas fa-bars"></i>
-       </button>
-       <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark" style="height: 75px;" *ngIf="!Media.IsMobile">
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-           <ul *ngIf="navigation" class="navbar-nav ">
-             <li *ngFor="let item of navigation; let i = index" class="nav-item dropdown">
-               <a *ngIf="item.showInToolbar && item.EISubMenu.length == 0" [routerLinkActive]="['active']" class="nav-link" [routerLink]="item.routerLink">
-                 <i class="{{item.iconClass}}">
-                   <span *ngIf="item.isNew" class="badge badge-info bg-danger text-sm" style="font-size: 9px;">New</span>
-                 </i>
-                 {{ item.translate | translate }}
-               </a>
-               <div *ngIf="item.EISubMenu.length > 0">
-                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <i class="{{item.iconClass}}">
-                     <span *ngIf="item.isNew" class="badge badge-info bg-danger text-sm" style="font-size: 9px;">New</span>
-                   </i>
-                   <p>
-                    {{ item.translate | translate }} <i class="fas fa-arrow-down"></i> 
-                   </p>
-                 </a>
-                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                   <a *ngFor="let val of item.EISubMenu" class="dropdown-item" [routerLink]="val.routerLink"><span> </span> <i class='{{val.iconClass}} nav_icon ms-2' style="margin-right: 6px;"></i> <span class="nav_name">{{ val.translate | translate }}<span *ngIf="val.isNew" class="badge badge-info bg-danger text-sm ms-2" style="font-size: 9px; z-index: 100;">New</span></span> </a>
-                 </div>
-               </div>
-             </li>
-           </ul>
-         </div>
-       </nav>
-     </div>
-     <div class="col-2 d-flex justify-content-end align-items-center button-logout" style="height: 75px;">
-       <ul class="navbar-nav me-2">
-         <li class="nav-item dropdown">
-           <a class="btn btn-primary dropdown-toggle" aria-label="Configuration" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-             <i class="fas fa-cog"></i>
-           </a>
-           <ul class="dropdown-menu dropdown-menu-dark text-small shadow dropdown-right" aria-labelledby="navbarDropdownMenuLink-4">
-             <li><a class="dropdown-item" [routerLink]="'/profile'"><i class='fas fa-user nav_icon me-2'></i> Perfil</a></li>
-             <li><a class="dropdown-item" [routerLink]="'/configuration'"><i class="fas fa-cog nav_icon me-2"></i> Configuración</a></li>
-             <li><span style="cursor: pointer;" class="dropdown-item" (click)="openModal()"><i class="fas fa-lock nav_icon me-2"></i> Contraseña</span></li>
-             <li>
-                 <hr class="dropdown-divider">
-             </li>
-             <li><a (click)="logout()" class="dropdown-item" href="#"><i class='fas fa-sign-out-alt nav_icon me-2'></i>  {{ 'USER.NAVBAR.LOGOUT' | translate }}</a></li>
-         </ul>
-         </li>
-       </ul>
-       <button (click)="logout()" aria-label="Logout" class="btn btn-secondary h-100 rounded-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-         <i class="fas fa-sign-out-alt fs-2"></i>
-       </button>
-     </div>
-   </div>
- </div>
- 
-    <!-- Modal -->
- <div class="modal fade homeBody" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-   <div class="modal-dialog">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title text-center" id="passwordModalLabel">Cambiar Contraseña</h5>
-         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-       </div>
-       <div class="register-form p-4">
-         <app-reset></app-reset>
-       </div>
-     </div>
-   </div>
- </div>
- 
+    <div class="col-10 justify-content-between align-items-center">
+      <button class="btn btn-primary mt-3" aria-label="Open Menu" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" *ngIf="Media.IsMobile">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark" style="height: 75px;" *ngIf="!Media.IsMobile">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul *ngIf="navigation" class="navbar-nav ">
+            <li *ngFor="let item of navigation; let i = index" class="nav-item dropdown">
+              <a *ngIf="item.showInToolbar && item.EISubMenu.length == 0" [routerLinkActive]="['active']"
+                class="nav-link" [routerLink]="item.routerLink">
+                <i class="{{item.iconClass}}">
+                  <span *ngIf="item.isNewRoute" class="badge badge-info bg-danger text-sm"
+                    style="font-size: 9px;">New</span>
+                </i>
+                {{ item.translate | translate }}
+              </a>
+              <div *ngIf="item.EISubMenu.length > 0">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="{{item.iconClass}}">
+                    <span *ngIf="item.isNewRoute" class="badge badge-info bg-danger text-sm"
+                      style="font-size: 9px;">New</span>
+                  </i>
+                  <p>
+                    {{ item.translate | translate }} <i class="fas fa-arrow-down"></i>
+                  </p>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a *ngFor="let val of item.EISubMenu" class="dropdown-item" [routerLink]="val.routerLink"><span>
+                    </span> <i class='{{val.iconClass}} nav_icon ms-2' style="margin-right: 6px;"></i> <span
+                      class="nav_name">{{ val.translate | translate }}<span *ngIf="val.isNewRoute"
+                        class="badge badge-info bg-danger text-sm ms-2"
+                        style="font-size: 9px; z-index: 100;">New</span></span> </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="col-2 d-flex justify-content-end align-items-center button-logout" style="height: 75px;">
+      <ul class="navbar-nav me-2">
+        <li class="nav-item dropdown">
+          <a class="btn btn-primary dropdown-toggle" aria-label="Configuration" href="#" role="button"
+            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-cog"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow dropdown-right"
+            aria-labelledby="navbarDropdownMenuLink-4">
+            <li><a class="dropdown-item" [routerLink]="'/profile'"><i class='fas fa-user nav_icon me-2'></i> Perfil</a>
+            </li>
+            <li><a class="dropdown-item" [routerLink]="'/configuration'"><i class="fas fa-cog nav_icon me-2"></i>
+                Configuración</a></li>
+            <li><span style="cursor: pointer;" class="dropdown-item" (click)="openModal()"><i
+                  class="fas fa-lock nav_icon me-2"></i> Contraseña</span></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a (click)="logout()" class="dropdown-item" href="#"><i class='fas fa-sign-out-alt nav_icon me-2'></i>
+                {{ 'USER.NAVBAR.LOGOUT' | translate }}</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button (click)="logout()" aria-label="Logout" class="btn btn-secondary h-100 rounded-0" type="button"
+        data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="fas fa-sign-out-alt fs-2"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade homeBody" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="passwordModalLabel">Cambiar Contraseña</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="register-form p-4">
+        <app-reset></app-reset>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@ import { MainLayoutComponent } from './core/layouts/main-layout/main-layout.comp
 
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { PermissionsComponent } from './components/permissions/permissions.component';
+import { PermissionsComponent } from './components/structure/permissions/permissions.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { StructureComponent } from './components/structure/structure.component';
@@ -50,7 +50,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'admin', pathMatch: 'full' },
       { path: 'admin', component: AdministratorComponent},
-      { path: 'permissions', component: PermissionsComponent},
       { path: 'configuration-admin', component: ConfigurationComponent},
       { path: 'profile-admin', component: ProfileComponent },
       { path: 'structures', component: StructureComponent,

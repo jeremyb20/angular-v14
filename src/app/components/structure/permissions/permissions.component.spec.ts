@@ -11,9 +11,7 @@ describe('PermissionsComponent', () => {
       declarations: [ PermissionsComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(PermissionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

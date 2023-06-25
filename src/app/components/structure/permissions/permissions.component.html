@@ -1,0 +1,192 @@
+<div class="row g-0">
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop"
+    aria-controls="offcanvasWithBackdrop">Habilitar backdrop (default)</button>
+
+
+
+  <div [ngClass]="{'col-sm-8': showUserCard, 'col-sm-12':!showUserCard}">
+    <ngx-datatable [tableId]="'marcas'" tableClass="table table-striped table-bordered table-hover" [data]="data"
+      [options]="options" [columns]="columns">
+      <ngx-caption>
+        <div class="row p-1">
+          <div class="col-sm-6 col-xs-6 col-6 ">
+            <b>
+              <i class="fa fa-table" aria-hidden="true"></i>
+              Permisos de Usuarios
+            </b>
+          </div>
+          <div class="col-sm-6 col-xs-6 col-6 text-end">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+              aria-controls="offcanvasRight">
+              <i class="fa fa-plus" aria-hidden="true"></i> Crear Nueva Ruta
+            </button>
+          </div>
+        </div>
+      </ngx-caption>
+      <ng-template #actionEditAndDelete let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+        <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit"
+          (click)="createOrEditModalUser(row, 'Editar Usuario', false)"><i
+            class="fas fa-pencil-alt me-3 text-primary"></i> </a>
+        <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close"
+          (click)="deleteUser(row)"><i class="fas fa-trash text-danger"></i></a>
+      </ng-template>
+    </ngx-datatable>
+  </div>
+  <div *ngIf="showUserRightCard" class="col-sm-4 px-3">
+    <div class="modal-content shadow">
+      <div class="modal-header p-3">
+        <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+        <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
+      </div>
+      <div class="outer-form table-responsive">
+        <table aria-label="table" class="table table-hover verticle-middle table-responsive-lg mb-0"
+          [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
+          <thead style="color: white; font-weight: normal; background-color: black;">
+            <tr>
+              <th scope="col" class="head">Navegador</th>
+              <th scope="col" class="head">Permisos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-template ngFor let-element [ngForOf]="navigation" let-i="index">
+              <tr>
+                <td><a class="nav_link"> <i class='{{element.iconClass}} nav_icon'></i> <span class="nav_name">{{
+                      element.translate | translate }}</span> </a></td>
+                <td>
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="{{element.Id}}" [ngModel]="element.hasPermission"
+                        hecked="element.hasPermission">
+                      <label for="{{element.Id}}">Toggle</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngFor="let val of element.EISubMenu">
+                <td style="background: aqua;"><a class="nav_link"> <i class='{{val.iconClass}} nav_icon'></i> <span
+                      class="nav_name">{{ val.translate | translate }}</span> </a></td>
+                <td style="background: aqua;">
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="{{val.Id}}" [ngModel]="val.hasPermission" hecked="val.hasPermission">
+                      <label for="{{val.Id}}">Toggle</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop"
+    aria-labelledby="offcanvasWithBackdropLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas con backdrop</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+      <p>.....</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newUserModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+  aria-labelledby="newUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="newUserModalLabel">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="outer-form table-responsive">
+        <table aria-label="table" class="table table-hover verticle-middle table-responsive-lg mb-0"
+          [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
+          <thead style="color: white; font-weight: normal; background-color: black;">
+            <tr>
+              <th scope="col" class="head">Navegador</th>
+              <th scope="col" class="head">Permisos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-template ngFor let-element [ngForOf]="navigation" let-i="index">
+              <tr>
+                <td><a class="nav_link"> <i class='{{element.iconClass}} nav_icon'></i> <span class="nav_name">{{
+                      element.translate | translate }}</span> </a></td>
+                <td>
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="{{element.Id}}" [ngModel]="element.hasPermission"
+                        hecked="element.hasPermission">
+                      <label for="{{element.Id}}">Toggle</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngFor="let val of element.EISubMenu">
+                <td style="background: aqua;"><a class="nav_link"> <i class='{{val.iconClass}} nav_icon'></i> <span
+                      class="nav_name">{{ val.translate | translate }}</span> </a></td>
+                <td style="background: aqua;">
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="{{val.Id}}" [ngModel]="val.hasPermission" hecked="val.hasPermission">
+                      <label for="{{val.Id}}">Toggle</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

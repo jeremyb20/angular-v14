@@ -35,7 +35,7 @@ export interface Navigation {
   hasPermission: boolean;
   showInToolbar: boolean;
   showInSideNav: boolean;
-  isNew: boolean;
+  isNewRoute: boolean;
   EISubMenu: any;
 }
 
@@ -87,61 +87,61 @@ export const NAVIGATION: Navigation[] = [
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: true,
+    isNewRoute: true,
     EISubMenu: [
       {
-        Id:34,
+        Id:43,
         routerLink: '/e-sports',
         iconClass: 'fas fa-gamepad',
         translate: 'USER.NAVBAR.E_SPORTS',
         hasPermission: true,
         showInToolbar: true,
         showInSideNav: true,
-        isNew: false,
+        isNewRoute: false,
         EISubMenu: []
       },
       {
-        Id:34,
+        Id:44,
         routerLink: '/live-wager',
         iconClass: 'fas fa-wifi',
         translate: 'USER.NAVBAR.LIVE_WAGER',
         hasPermission: true,
         showInToolbar: true,
         showInSideNav: true,
-        isNew: false,
+        isNewRoute: false,
         EISubMenu: []
       },
       {
-        Id:34,
+        Id:45,
         routerLink: '/casino',
         iconClass: 'fas fa-dice',
         translate: 'USER.NAVBAR.CASINO',
         hasPermission: true,
         showInToolbar: true,
         showInSideNav: true,
-        isNew: false,
+        isNewRoute: false,
         EISubMenu: []
       }, 
       {
-        Id:34,
+        Id:46,
         routerLink: '/props-builder',
         iconClass: 'fas fa-tools',
         translate: 'USER.NAVBAR.PROPS_BUILDER',
         hasPermission: true,
         showInToolbar: true,
         showInSideNav: true,
-        isNew: false,
+        isNewRoute: false,
         EISubMenu: []
       },
       {
-        Id:34,
+        Id:47,
         routerLink: '/racebook',
         iconClass: 'fas fa-horse-head',
         translate: 'USER.NAVBAR.RACEBOOK',
         hasPermission: true,
         showInToolbar: true,
         showInSideNav: true,
-        isNew: false,
+        isNewRoute: false,
         EISubMenu: []
       }
     ]
@@ -154,94 +154,94 @@ export const NAVIGATION: Navigation[] = [
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   },
   {
-    Id:34,
+    Id:35,
     routerLink: '/live-wager',
     iconClass: 'fas fa-wifi',
     translate: 'USER.NAVBAR.LIVE_WAGER',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   },
   {
-    Id:34,
+    Id:36,
     routerLink: '/casino',
     iconClass: 'fas fa-dice',
     translate: 'USER.NAVBAR.CASINO',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   }, 
   {
-    Id:34,
+    Id:37,
     routerLink: '/props-builder',
     iconClass: 'fas fa-tools',
     translate: 'USER.NAVBAR.PROPS_BUILDER',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   },
   {
-    Id:34,
+    Id:38,
     routerLink: '/racebook',
     iconClass: 'fas fa-horse-head',
     translate: 'USER.NAVBAR.RACEBOOK',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   }, {
-    Id:34,
+    Id:39,
     routerLink: '/contest',
     iconClass: 'fas fa-medal',
     translate: 'USER.NAVBAR.CONTEST',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   },
   {
-    Id:34,
+    Id:40,
     routerLink: '/cockfight',
     iconClass: 'fas fa-gamepad',
     translate: 'USER.NAVBAR.COCKFIGHT',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   },
   {
-    Id:34,
+    Id:41,
     routerLink: '/virtual-sports',
     iconClass: 'fas fa-gamepad',
     translate: 'USER.NAVBAR.VIRTUAL_SPORTS',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   },
   {
-    Id:34,
+    Id:42,
     routerLink: '/poker',
     iconClass: 'fas fa-gamepad',
     translate: 'USER.NAVBAR.POKER',
     hasPermission: true,
     showInToolbar: true,
     showInSideNav: true,
-    isNew: false,
+    isNewRoute: false,
     EISubMenu: []
   }
 ]
@@ -269,6 +269,14 @@ export const NAVIGATION_ADMIN: NavigationAdmin[] = [
     routerLink: '/structures/employees',
     iconClass: 'fas fa-users-cog',
     translate: 'ADMIN.NAVBAR.STRUCTURES.EMPLOYEES',
+    hasPermission: false,
+    EISubMenu: []
+  },
+  {
+    Id:7,
+    routerLink: '/structures/permissions',
+    iconClass: 'fas fa-users-cog',
+    translate: 'ADMIN.NAVBAR.STRUCTURES.PERMISSIONS',
     hasPermission: false,
     EISubMenu: []
   }

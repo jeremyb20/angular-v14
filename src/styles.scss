@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
 @import './scss/partials/bootstrap-breakpoints';
 @import './scss/custom-variables.scss';
 @import './scss/fontawesome5/fontawesome';
@@ -13,10 +15,9 @@
 
 :root {
   --primary-color: #fff;
-  --bs-body-bg: #354152 !important;
   --bs-btn-bg: #1c5eac;
-  --background: var(--bs-body-bg) !important;
-  --background-color: var(--bs-body-bg) !important;
+  --background: #354152 !important;
+  --background-color: var(--background) !important;
   --text-color: #2d2d2d;
   --bg: #fffdf2;
   min-height: 100vh;
@@ -371,5 +372,3 @@ color: #fff!important;
   max-width: 250px;
   font-size: 12px;
 }
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';

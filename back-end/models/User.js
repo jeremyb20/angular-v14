@@ -3,12 +3,32 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new Schema({
-  username: {type: String, required:true},
-  email: {type: String, required:true, unique: true},
-  password: {type: String, required:true},
-  lang: {type: String, required:true},
-  theme: {type: String, required:true},
-  userRol: {type: String, required: true}
+  username: {type: String, require:true},
+  email: {type: String, require:true, unique: true},
+  password: {type: String, require:true},
+  lang: {type: String, require:true},
+  theme: {type: String, require:true},
+  userRol: {type: String, require: true},
+  permissionNavigation: [{
+    Id:{type: Number, require:true},
+    routerLink: {type: String, require:true},
+    iconClass: {type: String, require:true},
+    translate: {type: String, require:true},
+    hasPermission: {type: Boolean, require:true},
+    showInToolbar: {type: Boolean, require:true},
+    showInSideNav: {type: Boolean, require:true},
+    isNewRoute: {type: Boolean, require:true},
+    EISubMenu: [{
+      Id:{type: Number, require:true},
+      routerLink: {type: String, require:true},
+      iconClass: {type: String, require:true},
+      translate: {type: String, require:true},
+      hasPermission: {type: Boolean, require:true},
+      showInToolbar: {type: Boolean, require:true},
+      showInSideNav: {type: Boolean, require:true},
+      isNewRoute: {type: Boolean, require:true}
+    }]
+  }]
 },{
   timestamps: true,
   versionKey: false

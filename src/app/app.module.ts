@@ -35,7 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StructureComponent } from './components/structure/structure.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { NotificationService } from './services/notification.service';
-import { PermissionsComponent } from './components/permissions/permissions.component';
+import { PermissionsComponent } from './components/structure/permissions/permissions.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ForgotComponent } from './components/forgot/forgot.component';
 import { TranslationService } from './services/translate.service';
