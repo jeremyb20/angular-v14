@@ -38,6 +38,7 @@ app.use(multer({storage}).single('image'));
 app.use("/api/employees", require('./back-end/routes/employees.routes'));
 app.use("/api/users", require('./back-end/routes/users.routes'));
 app.use("/api/inventory", require('./back-end/routes/inventory.routes'));
+app.use("/api/navigation", require('./back-end/routes/navigation.routes'));
 
 // Start Server
 app.use(express.static(__dirname + '/dist/angular-v14'));

@@ -108,4 +108,49 @@ userCtl.editTheme = async ( req,res )=> {
   res.send({success: true, message: 'El tema ha sido actualizado exitosamente.'});
 }
 
+userCtl.addUserNavigation = async (req, res) => {
+  User.findOneAndUpdate({ _id: req.body._id }, { $push: { navigation: req.body.navigation } }, { new: true }).then(function (data) {
+    res.send({ message: 'Navegación agregada exitosamente', success: true });
+  });
+}
+
+userCtl.registerNavigation = async (req, res) => {
+  if (req.body.isSubRoute) {
+    const navigation = await User.findById(req.body.Id);
+    const subRoute = {
+      routerLink: req.body.routerLink,
+      iconClass: req.body.iconClass,
+      translate: req.body.translate,
+      hasPermission: req.body.hasPermission,
+      showInToolbar: req.body.showInToolbar,
+      showInSideNav: req.body.showInSideNav,
+      isNewRoute: req.body.isNewRoute
+    }
+    navigation.navigation.push(subRoute);
+
+    navigation.save()
+    res.send({ message: 'Sub ruta actualizada', success: true });
+  } else {
+    const userFound = await User.findById(req.body.idParental);
+
+    if (userFound) { 
+
+      const routerObj = {
+        routerLink: req.body.routerLink,
+        iconClass: req.body.iconClass,
+        translate: req.body.translate,
+        hasPermission: req.body.hasPermission,
+        showInToolbar: req.body.showInToolbar,
+        showInSideNav: req.body.showInSideNav,
+        isNewRoute: req.body.isNewRoute,
+        EISubMenu: []
+      }
+
+      User.findOneAndUpdate({ _id: req.body._id }, { $push: { navigation: routerObj } }, { new: true }).then(function (data) {
+        res.send({ message: 'Navegación agregada exitosamente', success: true });
+      });
+    }
+  }
+}
+
 module.exports = userCtl;

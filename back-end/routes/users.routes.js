@@ -17,7 +17,11 @@ router.post('/editUser',userCtl.editUser);
 
 router.post('/setTranslateUser',verification,userCtl.setTranslateUser);
 
-router.post('/setThemeUser',verification,userCtl.editTheme);
+router.post('/setThemeUser', verification, userCtl.editTheme);
+
+router.post('/addUserNavigation', verification, userCtl.addUserNavigation);
+
+router.post('/registerNavigation', verification, userCtl.registerNavigation);
 
 router.post('/deleteUser',userCtl.deleteUser);
 

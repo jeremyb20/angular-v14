@@ -16,6 +16,11 @@
                 </div>
             </div>
         </ngx-caption>
+        <ng-template #navRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+          <a *ngIf="row.navigation.length > 0" data-toggle="tooltip" data-placement="top" title="Configurar Navegación" data-original-title="Ver Navegación" (click)="configNavigation(row, false)"><i class="fas fa-cog me-3 text-success"></i> </a>
+          <a *ngIf="row.navigation.length === 0" data-toggle="tooltip" data-placement="top" title="Agregar Navegación" data-original-title="Ver Navegación" (click)="configNavigation(row, true)"><i class="fas fa-plus me-3 text-primary"></i> </a>
+        </ng-template>
+
         <ng-template #actionEditAndDelete let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
           <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit" (click)="createOrEditModalUser(row, 'Editar Usuario', false)"><i class="fas fa-pencil-alt me-3 text-primary"></i> </a>
           <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close" (click)="deleteUser(row)"><i class="fas fa-trash text-danger"></i></a>
@@ -154,6 +159,168 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="navigationModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+  aria-labelledby="navigationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="navigationModalLabel">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body outer-form table-responsive row g-0">
+        <div [ngClass]="{'col-sm-8': showUserNavCard, 'col-sm-12':!showUserNavCard}">
+          <ngx-datatable [tableId]="'navigation'" tableClass="table table-striped table-bordered table-hover"
+            [data]="navigationData" [options]="options" [columns]="navColumns">
+            <ngx-caption>
+              <div class="row p-1">
+                <div class="col-sm-6 col-xs-6 col-6 ">
+                  <b>
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                    Permisos de Navegación
+                  </b>
+                </div>
+                <div class="col-sm-6 col-xs-6 col-6 text-end">
+                  <button type="button" (click)="createOrEditModalNavigationUser([], 'Nueva Navegación', true, false)" class="btn btn-secondary">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Crear Nueva Navegación
+                  </button>
+                </div>
+              </div>
+            </ngx-caption>
+          
+            <ng-template #iconRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+              <i [ngClass]="row.iconClass"></i> {{row.iconClass}}
+            </ng-template>
+          
+            <ng-template #tranlateRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+              {{row.translate | translate}}
+            </ng-template>
+          
+            <ng-template #actionEditAndDeleteSub let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+              <a (click)="createOrEditModalNavigationUser(row, 'Editar Navegación', false, false)" data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit"><i
+                  class="fas fa-pencil-alt me-3 text-primary"></i> </a>
+              <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close"><i
+                  class="fas fa-trash text-danger"></i></a>
+            </ng-template>
+          </ngx-datatable>
+        </div>
+
+        <div *ngIf="showUserNavRightCard" class="col-sm-4 px-3">
+          <div class="modal-content shadow">
+            <div class="modal-header p-3">
+              <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+              <button type="button" (click)="hideCardNav()" class="btn-close btn-close-white" aria-label="Close"></button>
+            </div>
+            <form class="form-signin" [formGroup]="userNavForm" (ngSubmit)="onSubmitNavigation()">
+              <div class="modal-body">
+                <div class="form-group mb-2">
+                  <label class="mb-0 fw-bold">Router Link</label>
+                  <div class="input-group">
+                    <input name="routerLink" formControlName="routerLink" class="form-control" id="routerLink"
+                      [ngClass]="{ 'is-invalid': submittedNav && j.routerLink.errors }"
+                      placeholder="Formato válido: '/mi-navegacion' ">
+                    <div *ngIf="submittedNav && j.routerLink.errors" class="invalid-feedback">
+                      <div *ngIf="j.routerLink.errors.required">Router Link es requerida</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-2">
+                  <label class="mb-0 fw-bold">Icon Class</label>
+                  <div class="input-group">
+                    <input name="iconClass" formControlName="iconClass" class="form-control" id="iconClass"
+                      [ngClass]="{ 'is-invalid': submittedNav && j.iconClass.errors }" placeholder="Formato válido: 'fas fa-home'">
+                    <div *ngIf="submittedNav && j.iconClass.errors" class="invalid-feedback">
+                      <div *ngIf="j.iconClass.errors.required">Icon Class es requerida</div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="form-group mb-2">
+                  <label class="mb-0 fw-bold">Translate</label>
+                  <div class="input-group">
+                    <input name="translate" formControlName="translate" class="form-control" id="translate"
+                      [ngClass]="{ 'is-invalid': submittedNav && j.translate.errors }"
+                      placeholder="Formato válido: 'USER.NAVBAR.HOME'">
+                    <div *ngIf="submittedNav && j.translate.errors" class="invalid-feedback">
+                      <div *ngIf="j.translate.errors.required">Translate es requerida</div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="row">
+                  <div class="col form-group mb-2">
+                    <label class="mb-0 fw-bold">Has Permissions</label>
+                    <div class="input-group">
+                      <div class="outerDivFull">
+                        <div class="switchToggle">
+                          <input type="checkbox" id="hasPermission" formControlName="hasPermission" checked="hasPermission">
+                          <label for="hasPermission">Toggle</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <div class="col form-group mb-2">
+                    <label class="mb-0 fw-bold">Show Toolbar</label>
+                    <div class="input-group">
+                      <div class="outerDivFull">
+                        <div class="switchToggle">
+                          <input type="checkbox" id="showInToolbar" formControlName="showInToolbar" checked="showInToolbar">
+                          <label for="showInToolbar">Toggle</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="row">
+                  <div class="col form-group mb-2">
+                    <label class="mb-0 fw-bold">Show Navbar</label>
+                    <div class="input-group">
+                      <div class="outerDivFull">
+                        <div class="switchToggle">
+                          <input type="checkbox" id="showInSideNav" formControlName="showInSideNav" checked="showInSideNav">
+                          <label for="showInSideNav">Toggle</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <div class="col form-group mb-2">
+                    <label class="mb-0 fw-bold">Is New Route?</label>
+                    <div class="input-group">
+                      <div class="outerDivFull">
+                        <div class="switchToggle">
+                          <input type="checkbox" id="isNewRoute" formControlName="isNewRoute" checked="isNewRoute">
+                          <label for="isNewRoute">Toggle</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+                <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+                  <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+                </div>
+              </div>
+              <div class="row modal-footer p-3">
+                <button type="button" class="col btn btn-secondary btn-sm me-2" (click)="hideCardNav()">Cancelar</button>
+                <button type="submit" class="col btn btn-block btn-info btn-sm">
+                  {{buttonText}}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        
+
+      </div>
     </div>
   </div>
 </div>

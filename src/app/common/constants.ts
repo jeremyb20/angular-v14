@@ -276,7 +276,7 @@ export const NAVIGATION_ADMIN: NavigationAdmin[] = [
     Id:7,
     routerLink: '/structures/permissions',
     iconClass: 'fas fa-users-cog',
-    translate: 'ADMIN.NAVBAR.STRUCTURES.PERMISSIONS',
+    translate: 'ADMIN.NAVBAR.STRUCTURES.PERMISSIONSNAV',
     hasPermission: false,
     EISubMenu: []
   }

@@ -130,6 +130,23 @@ export class AuthService {
     return this._http.post(`${environment.ws}/users/setThemeUser`, data,{headers:this.headers});
   }
 
+  addUserNavigation(data: any): Observable<any> {
+    return this._http.post(`${environment.ws}/users/addUserNavigation`, data, { headers: this.headers });
+  }
+
+  postCreateOrEditNavigation(isNew: boolean, data: any, isSubRoute: boolean): Observable<any> {
+    if (isNew) {
+      if (!isSubRoute) {
+        this.url = (isNew) ? '/user/registerNavigation' : '/user/editNavigation';
+      } else {
+        this.url = '/user/registerNavigation';
+      }
+    } else {
+      this.url = '/user/editNavigation';
+    }
+    return this._http.post(`${environment.ws}` + this.url, data, { headers: this.headers });
+  }
+  
 // USERS end
 
 

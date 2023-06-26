@@ -58,6 +58,7 @@ import { VirtualSportsComponent } from './core/main/virtual-sports/virtual-sport
 import { PokerComponent } from './core/main/poker/poker.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { PermissionsService } from './services/permissions.service';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -143,6 +144,7 @@ export function tokenGetter() {
   providers: [
     ThemeService,
     NotificationService,
+    PermissionsService,
     TranslationService,
     {
       provide: HTTP_INTERCEPTORS,

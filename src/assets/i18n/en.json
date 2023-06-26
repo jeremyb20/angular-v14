@@ -32,7 +32,7 @@
         "INVENTORY": "Inventory",
         "USERS": "Users",
         "EMPLOYEES": "Employees",
-        "PERMISSIONS": "Permissions"
+        "PERMISSIONSNAV": "Navigation"
       }
     }
   },

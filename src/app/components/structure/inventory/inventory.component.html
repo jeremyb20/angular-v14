@@ -31,11 +31,11 @@
   <div *ngIf="showCardRightBrands" class="col-sm-4 px-3">
     <div class="homeBody">
       <div class="modal-content shadow">
-        <div class="modal-header">
+        <div class="modal-header p-3">
           <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
           <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
         </div>
-        <form class="form-signin" [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+        <form class="form-signin p-3" [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
           <div class="modal-body">
             <div class="row g-3 mb-2">
               <div class="col-md-6">
@@ -124,7 +124,7 @@
               <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer p-3">
             <button type="button" class="btn btn-secondary btn-sm" (click)="hideCard()">Cancelar</button>
             <button type="submit" class="btn btn-block btn-info btn-sm">
               {{buttonText}}

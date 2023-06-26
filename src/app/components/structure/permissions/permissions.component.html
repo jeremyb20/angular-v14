@@ -1,9 +1,4 @@
 <div class="row g-0">
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop"
-    aria-controls="offcanvasWithBackdrop">Habilitar backdrop (default)</button>
-
-
-
   <div [ngClass]="{'col-sm-8': showUserCard, 'col-sm-12':!showUserCard}">
     <ngx-datatable [tableId]="'marcas'" tableClass="table table-striped table-bordered table-hover" [data]="data"
       [options]="options" [columns]="columns">
@@ -12,133 +7,280 @@
           <div class="col-sm-6 col-xs-6 col-6 ">
             <b>
               <i class="fa fa-table" aria-hidden="true"></i>
-              Permisos de Usuarios
+              Permisos de Navegación
             </b>
           </div>
           <div class="col-sm-6 col-xs-6 col-6 text-end">
-            <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight">
-              <i class="fa fa-plus" aria-hidden="true"></i> Crear Nueva Ruta
+            <button type="button" class="btn btn-secondary" (click)="createOrEditModalUser([], 'Nueva Navegación', true, false)">
+              <i class="fa fa-plus" aria-hidden="true"></i> Crear Nueva Navegación
             </button>
           </div>
         </div>
       </ngx-caption>
+
+      <ng-template #iconRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+        <i [ngClass]="row.iconClass"></i> {{row.iconClass}}
+      </ng-template>
+
+      <ng-template #tranlateRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+        {{row.translate | translate}}
+      </ng-template>
+
+      <ng-template #hasSubRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+        <div class="p-0 m-0" *ngIf="row.EISubMenu.length === 0">
+          <a data-toggle="tooltip" data-placement="top" title="Agregar Sub Ruta" data-original-title="Edit"
+            (click)="createOrEditModalUser(row, 'Nueva Sub Ruta', false, true)"><i class="fa fa-plus me-3 text-primary"></i><span>{{row.EISubMenu.length}}</span>
+          </a>
+        </div>
+        <div class="p-0 m-0" *ngIf="row.EISubMenu.length > 0">
+          <a data-toggle="tooltip" data-placement="top" title="Agregar Sub Ruta" data-original-title="Edit"
+            (click)="createOrEditModalUser(row, 'Nueva Sub Ruta', false, true)"><i
+              class="fa fa-plus me-3 text-primary"></i>
+          </a>
+          <a data-toggle="tooltip" data-placement="top" title="Ver sub rutas" data-original-title="Edit"
+            (click)="watchSubRoutes(row)"><i class="fas fa-eye me-3 text-primary"></i> <span>{{row.EISubMenu.length}}</span> 
+          </a>
+        </div>
+      </ng-template>
+
       <ng-template #actionEditAndDelete let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
         <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit"
-          (click)="createOrEditModalUser(row, 'Editar Usuario', false)"><i
+          (click)="createOrEditModalUser(row, 'Editar Usuario', false, false)"><i
             class="fas fa-pencil-alt me-3 text-primary"></i> </a>
         <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close"
-          (click)="deleteUser(row)"><i class="fas fa-trash text-danger"></i></a>
+          (click)="deleteRoute(row, false)"><i class="fas fa-trash text-danger"></i></a>
       </ng-template>
     </ngx-datatable>
   </div>
+
+<!-- <div class="card" style="width: 18rem;">
+<div class="card-header">
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop"
+    aria-controls="offcanvasWithBackdrop">Nueva Ruta
+  </button>
+  </div>
+  <div class="card-body">
+  <table aria-label="table" class="table table-hover verticle-middle table-responsive-lg mb-0"
+    [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
+    <thead style="color: white; font-weight: normal; background-color: black;">
+      <tr>
+        <th scope="col" class="head">Navegador</th>
+        <th scope="col" class="head">Permisos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template ngFor let-element [ngForOf]="navigation" let-i="index">
+        <tr>
+          <td><a class="nav_link"> <i class='{{element.iconClass}} nav_icon'></i> <span class="nav_name">{{
+                element.translate | translate }}</span> </a></td>
+          <td>
+            <div class="outerDivFull">
+              <div class="switchToggle">
+                <input type="checkbox" id="{{element.Id}}" [ngModel]="element.hasPermission"
+                  hecked="element.hasPermission">
+                <label for="{{element.Id}}">Toggle</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngFor="let val of element.EISubMenu">
+          <td style="background: aqua;"><a class="nav_link"> <i class='{{val.iconClass}} nav_icon'></i> <span
+                class="nav_name">{{ val.translate | translate }}</span> </a></td>
+          <td style="background: aqua;">
+            <div class="outerDivFull">
+              <div class="switchToggle">
+                <input type="checkbox" id="{{val.Id}}" [ngModel]="val.hasPermission" hecked="val.hasPermission">
+                <label for="{{val.Id}}">Toggle</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+  </div>
+</div> -->
+
+
+
+  
   <div *ngIf="showUserRightCard" class="col-sm-4 px-3">
     <div class="modal-content shadow">
       <div class="modal-header p-3">
-        <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+        <h5 class="modal-title text-center" id="titleModalLabel">{{title}}</h5>
         <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
       </div>
-      <div class="outer-form table-responsive">
-        <table aria-label="table" class="table table-hover verticle-middle table-responsive-lg mb-0"
-          [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
-          <thead style="color: white; font-weight: normal; background-color: black;">
-            <tr>
-              <th scope="col" class="head">Navegador</th>
-              <th scope="col" class="head">Permisos</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-template ngFor let-element [ngForOf]="navigation" let-i="index">
-              <tr>
-                <td><a class="nav_link"> <i class='{{element.iconClass}} nav_icon'></i> <span class="nav_name">{{
-                      element.translate | translate }}</span> </a></td>
-                <td>
+      <div class="outer-form p-3">
+        <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Router Link</label>
+              <div class="input-group">
+                <input name="routerLink" formControlName="routerLink" class="form-control" id="routerLink"
+                  [ngClass]="{ 'is-invalid': submitted && f.routerLink.errors }" placeholder="Formato válido: '/mi-navegacion' ">
+                <div *ngIf="submitted && f.routerLink.errors" class="invalid-feedback">
+                  <div *ngIf="f.routerLink.errors.required">Router Link es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Icon Class</label>
+              <div class="input-group">
+                <input name="iconClass" formControlName="iconClass" class="form-control" id="iconClass"
+                  [ngClass]="{ 'is-invalid': submitted && f.iconClass.errors }" placeholder="Formato válido: 'fas fa-home'">
+                <div *ngIf="submitted && f.iconClass.errors" class="invalid-feedback">
+                  <div *ngIf="f.iconClass.errors.required">Icon Class es requerida</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Translate</label>
+              <div class="input-group">
+                <input name="translate" formControlName="translate" class="form-control" id="translate"
+                  [ngClass]="{ 'is-invalid': submitted && f.translate.errors }" placeholder="Formato válido: 'USER.NAVBAR.HOME'">
+                <div *ngIf="submitted && f.translate.errors" class="invalid-feedback">
+                  <div *ngIf="f.translate.errors.required">Translate es requerida</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Has Permissions</label>
+                <div class="input-group">
                   <div class="outerDivFull">
                     <div class="switchToggle">
-                      <input type="checkbox" id="{{element.Id}}" [ngModel]="element.hasPermission"
-                        hecked="element.hasPermission">
-                      <label for="{{element.Id}}">Toggle</label>
+                      <input type="checkbox" id="hasPermission" formControlName="hasPermission" checked="hasPermission">
+                      <label for="hasPermission">Toggle</label>
                     </div>
                   </div>
-                </td>
-              </tr>
-              <tr *ngFor="let val of element.EISubMenu">
-                <td style="background: aqua;"><a class="nav_link"> <i class='{{val.iconClass}} nav_icon'></i> <span
-                      class="nav_name">{{ val.translate | translate }}</span> </a></td>
-                <td style="background: aqua;">
+                </div>
+              </div>
+
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Show Toolbar</label>
+                <div class="input-group">
                   <div class="outerDivFull">
                     <div class="switchToggle">
-                      <input type="checkbox" id="{{val.Id}}" [ngModel]="val.hasPermission" hecked="val.hasPermission">
-                      <label for="{{val.Id}}">Toggle</label>
+                      <input type="checkbox" id="showInToolbar" formControlName="showInToolbar" checked="showInToolbar">
+                      <label for="showInToolbar">Toggle</label>
                     </div>
                   </div>
-                </td>
-              </tr>
-            </ng-template>
-          </tbody>
-        </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Show Navbar</label>
+                <div class="input-group">
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="showInSideNav" formControlName="showInSideNav" checked="showInSideNav">
+                      <label for="showInSideNav">Toggle</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Is New Route?</label>
+                <div class="input-group">
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="isNewRoute" formControlName="isNewRoute" checked="isNewRoute">
+                      <label for="isNewRoute">Toggle</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+              <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+            </div>
+          </div>
+          <div class="row modal-footer p-3">
+            <button type="button" class="col btn btn-secondary btn-sm me-2" (click)="hideCard()">Cancelar</button>
+            <button type="submit" class="col btn btn-block btn-info btn-sm">
+              {{buttonText}}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop"
+</div>
+<!-- 
+
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasWithBackdrop"
     aria-labelledby="offcanvasWithBackdropLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas con backdrop</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
-      <p>.....</p>
+      
+    </div>
+  </div> -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="subMenudata" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+  aria-labelledby="subMenudataLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="subMenudataLabel">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body outer-form table-responsive">
+        <ngx-datatable [tableId]="'marcas-test'" tableClass="table table-striped table-bordered table-hover" [data]="subRouteData"
+          [options]="options" [columns]="subcolumns">
+          <ngx-caption>
+            <div class="row p-1">
+              <div class="col-sm-6 col-xs-6 col-6 ">
+                <b>
+                  <i class="fa fa-table" aria-hidden="true"></i>
+                  Permisos de Navegación
+                </b>
+              </div>
+              <div class="col-sm-6 col-xs-6 col-6 text-end">
+                <button type="button" class="btn btn-secondary"
+                  (click)="createOrEditModalUser([], 'Nueva Navegación', true, false)">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Crear Nueva Navegación
+                </button>
+              </div>
+            </div>
+          </ngx-caption>
+        
+          <ng-template #iconRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+            <i [ngClass]="row.iconClass"></i> {{row.iconClass}}
+          </ng-template>
+        
+          <ng-template #tranlateRef let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+            {{row.translate | translate}}
+          </ng-template>
+        
+          <ng-template #actionEditAndDeleteSub let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+            <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit"
+              (click)="createOrEditModalUser(row, 'Editar Usuario', false, false)"><i
+                class="fas fa-pencil-alt me-3 text-primary"></i> </a>
+            <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close"
+              (click)="deleteRoute(row, true)"><i class="fas fa-trash text-danger"></i></a>
+          </ng-template>
+        </ngx-datatable>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+
+
+<!-- Modal Register and edit -->
 <div class="modal fade" id="newUserModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
   aria-labelledby="newUserModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -148,44 +290,105 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="outer-form table-responsive">
-        <table aria-label="table" class="table table-hover verticle-middle table-responsive-lg mb-0"
-          [ngClass]="{'table-default-dark': currentTheme == 'theme-default-dark', 'table-default': currentTheme == 'theme-default', 'table-premium': currentTheme == 'theme-premium'}">
-          <thead style="color: white; font-weight: normal; background-color: black;">
-            <tr>
-              <th scope="col" class="head">Navegador</th>
-              <th scope="col" class="head">Permisos</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-template ngFor let-element [ngForOf]="navigation" let-i="index">
-              <tr>
-                <td><a class="nav_link"> <i class='{{element.iconClass}} nav_icon'></i> <span class="nav_name">{{
-                      element.translate | translate }}</span> </a></td>
-                <td>
+        <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Router Link</label>
+              <div class="input-group">
+                <input name="routerLink" formControlName="routerLink" class="form-control" id="routerLink"
+                  [ngClass]="{ 'is-invalid': submitted && f.routerLink.errors }"
+                  placeholder="Formato válido: '/mi-navegacion' ">
+                <div *ngIf="submitted && f.routerLink.errors" class="invalid-feedback">
+                  <div *ngIf="f.routerLink.errors.required">Router Link es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Icon Class</label>
+              <div class="input-group">
+                <input name="iconClass" formControlName="iconClass" class="form-control" id="iconClass"
+                  [ngClass]="{ 'is-invalid': submitted && f.iconClass.errors }" placeholder="Formato válido: 'fas fa-home'">
+                <div *ngIf="submitted && f.iconClass.errors" class="invalid-feedback">
+                  <div *ngIf="f.iconClass.errors.required">Icon Class es requerida</div>
+                </div>
+              </div>
+            </div>
+        
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Translate</label>
+              <div class="input-group">
+                <input name="translate" formControlName="translate" class="form-control" id="translate"
+                  [ngClass]="{ 'is-invalid': submitted && f.translate.errors }"
+                  placeholder="Formato válido: 'USER.NAVBAR.HOME'">
+                <div *ngIf="submitted && f.translate.errors" class="invalid-feedback">
+                  <div *ngIf="f.translate.errors.required">Translate es requerida</div>
+                </div>
+              </div>
+            </div>
+        
+            <div class="row">
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Has Permissions</label>
+                <div class="input-group">
                   <div class="outerDivFull">
                     <div class="switchToggle">
-                      <input type="checkbox" id="{{element.Id}}" [ngModel]="element.hasPermission"
-                        hecked="element.hasPermission">
-                      <label for="{{element.Id}}">Toggle</label>
+                      <input type="checkbox" id="hasPermission" formControlName="hasPermission" checked="hasPermission">
+                      <label for="hasPermission">Toggle</label>
                     </div>
                   </div>
-                </td>
-              </tr>
-              <tr *ngFor="let val of element.EISubMenu">
-                <td style="background: aqua;"><a class="nav_link"> <i class='{{val.iconClass}} nav_icon'></i> <span
-                      class="nav_name">{{ val.translate | translate }}</span> </a></td>
-                <td style="background: aqua;">
+                </div>
+              </div>
+        
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Show Toolbar</label>
+                <div class="input-group">
                   <div class="outerDivFull">
                     <div class="switchToggle">
-                      <input type="checkbox" id="{{val.Id}}" [ngModel]="val.hasPermission" hecked="val.hasPermission">
-                      <label for="{{val.Id}}">Toggle</label>
+                      <input type="checkbox" id="showInToolbar" formControlName="showInToolbar" checked="showInToolbar">
+                      <label for="showInToolbar">Toggle</label>
                     </div>
                   </div>
-                </td>
-              </tr>
-            </ng-template>
-          </tbody>
-        </table>
+                </div>
+              </div>
+            </div>
+        
+            <div class="row">
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Show Navbar</label>
+                <div class="input-group">
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="showInSideNav" formControlName="showInSideNav" checked="showInSideNav">
+                      <label for="showInSideNav">Toggle</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="col form-group mb-2">
+                <label class="mb-0 fw-bold">Is New Route?</label>
+                <div class="input-group">
+                  <div class="outerDivFull">
+                    <div class="switchToggle">
+                      <input type="checkbox" id="isNewRoute" formControlName="isNewRoute" checked="isNewRoute">
+                      <label for="isNewRoute">Toggle</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+              <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+            </div>
+          </div>
+          <div class="row modal-footer p-3">
+            <button type="button" class="col btn btn-secondary btn-sm me-2" (click)="hideCard()">Cancelar</button>
+            <button type="submit" class="col btn btn-block btn-info btn-sm">
+              {{buttonText}}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

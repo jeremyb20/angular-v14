@@ -25,11 +25,11 @@
     <div *ngIf="showUserRightCard" class="col-sm-4 px-3">
       <div class="homeBody">
         <div class="modal-content shadow">
-          <div class="modal-header">
+          <div class="modal-header p-3">
             <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
             <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
           </div>
-          <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <form class="form-signin p-3" [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div class="modal-body">
               <div class="form-group mb-2">
                 <label class="mb-0 fw-bold">Nombre del empleado</label>

@@ -9,7 +9,7 @@ const userSchema = new Schema({
   lang: {type: String, require:true},
   theme: {type: String, require:true},
   userRol: {type: String, require: true},
-  permissionNavigation: [{
+  navigation: [{
     Id:{type: Number, require:true},
     routerLink: {type: String, require:true},
     iconClass: {type: String, require:true},
